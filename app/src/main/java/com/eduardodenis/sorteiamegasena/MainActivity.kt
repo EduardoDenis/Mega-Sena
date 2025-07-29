@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -111,16 +113,21 @@ fun MainApp() {
                 Text(text = result.value)
             }
 
-            Button(onClick = {
-                focusRequester.requestFocus()
+            Button(
+                onClick = {
+                    focusRequester.requestFocus()
 
-                if (!validTextField(bet.value)) {
-                    Toast.makeText(context, "Preencha os campos", Toast.LENGTH_LONG).show()
-                    return@Button
-                }
-                result.value = generatorNumber(bet.value.toInt())
-                prefs.saveData(PREFS_KEY, result.value)
-            }, modifier = Modifier.padding(top = 70.dp)) {
+                    if (!validTextField(bet.value)) {
+                        Toast.makeText(context, "Preencha os campos", Toast.LENGTH_LONG).show()
+                        return@Button
+                    }
+                    result.value = generatorNumber(bet.value.toInt())
+                    prefs.saveData(PREFS_KEY, result.value)
+                }, modifier = Modifier.padding(top = 70.dp), colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0, 100, 0),
+                    contentColor = Color(255,255,255)
+                )
+            ) {
                 Text(
                     text = "Gerar Números", style = TextStyle(
                         fontSize = 30.sp
